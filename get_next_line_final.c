@@ -59,17 +59,20 @@ char *get_next_line(int fd)
 	char *temp;
 	int nline_index;
 
+    content = malloc(BUFFER_SIZE * sizeof(char));
+	line = malloc(BUFFER_SIZE * sizeof(char));
 	if(!buffer)
 		buffer = malloc(BUFFER_SIZE * sizeof(char));
 	else
 	{
+		if(!ft_find_newline(buffer))
+			line = ft_strjoin(line,buffer);
+		else 
+			content = ft_strjoin(content,buffer);
 		//printf("BUFFER %s\n",buffer);
 		free(buffer);
 		buffer = malloc(BUFFER_SIZE * sizeof(char));
 	}
-		
-    content = malloc(BUFFER_SIZE * sizeof(char));
-	line = malloc(BUFFER_SIZE * sizeof(char));
 	while(!ft_find_newline(content) && read(fd,content,BUFFER_SIZE))
 	{
 		line = ft_strjoin(line,content);
