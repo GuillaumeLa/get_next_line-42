@@ -37,7 +37,7 @@ char *get_next_line(int fd)
     content = malloc(BUFFER_SIZE * sizeof(char));
     if(!read(fd,content,BUFFER_SIZE))
         return(NULL); 
-    //printf("%s",buffer);
+    printf("%s",buffer);
     //printf("%s",content);
     int newlineplac = ft_find_newline(content);
     line = malloc((newlineplac +1 ) * sizeof(char));
