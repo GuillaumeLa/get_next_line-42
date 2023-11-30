@@ -88,7 +88,6 @@ char *get_next_line(int fd)
         i++;
     }
 	line = ft_strjoin(line,temp);
-	//printf(content);
 	buffer = ft_strjoin(buffer,&content[i+i]);
 	return(line);
 }
@@ -102,7 +101,7 @@ int main()
     test = get_next_line(fd);
     while(test)
     {
-       	//printf("%s",test);
+       	printf("%s",test);
         test = get_next_line(fd);
 
     }
