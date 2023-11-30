@@ -88,7 +88,7 @@ char *get_next_line(int fd)
         i++;
     }
 	line = ft_strjoin(line,temp);
-	printf(content);
+	//printf(content);
 	buffer = ft_strjoin(buffer,&content[i+i]);
 	return(line);
 }
