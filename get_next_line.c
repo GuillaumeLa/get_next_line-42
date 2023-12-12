@@ -14,7 +14,6 @@ char	*ft_read_filed(int fd, char *res)
 {
 	char	*readed;
 	int		len_read;
-	char	*temp;
 
 	if (!res)
 		res = ft_calloc(1, 1);
@@ -29,7 +28,7 @@ char	*ft_read_filed(int fd, char *res)
 			return (NULL);
 		}
 		readed[len_read] = 0;
-		res = ft_join_free(res, readed);
+		res = ft_free(res, readed);
 		if (ft_strchr(readed, '\n'))
 			break ;
 	}
@@ -100,7 +99,6 @@ int main()
 {
     int fd = open("test.txt",O_RDONLY);
     char *test;
-    int i = 0;
 
     test = get_next_line(fd);
     while(test)
