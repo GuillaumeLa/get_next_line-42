@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: glabaden <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/13 10:42:33 by glabaden          #+#    #+#             */
+/*   Updated: 2023/12/13 10:42:37 by glabaden         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "get_next_line.h"
-
 
 char	*ft_joinee(char *buffer, char *buf)
 {
@@ -10,18 +20,17 @@ char	*ft_joinee(char *buffer, char *buf)
 	free(buffer);
 	return (temp);
 }
+
 char	*ft_read_filed(int fd, char *buffer)
 {
 	char	*readed;
 	int		len_read;
 
 	if (!buffer)
-		buffer = ft_calloc(1,1);
-	readed = malloc((BUFFER_SIZE + 1 )*sizeof(char));
-	if(!buffer || !readed)
-	{
-		return  NULL;
-	}
+		buffer = ft_calloc(1, 1);
+	readed = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buffer || !readed)
+		return (NULL);
 	len_read = 1;
 	while (len_read > 0)
 	{
@@ -61,6 +70,7 @@ char	*ft_find_newline(char *buffer)
 		line[i++] = '\n';
 	return (line);
 }
+
 char	*ft_store(char *buffer)
 {
 	int		i;
@@ -84,34 +94,17 @@ char	*ft_store(char *buffer)
 	return (line);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-    static char *buffer;
-    char *line;
+	static char	*buffer;
+	char		*line;
 
-    if(fd < 0 || BUFFER_SIZE <= 0 || read(fd,0,0) < 0)
-        return (NULL);
-    buffer = ft_read_filed(fd,buffer);
-    if(!buffer)
-        return (NULL);
-    line = ft_find_newline(buffer);
-    buffer = ft_store(buffer);
-    return (line);
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (NULL);
+	buffer = ft_read_filed(fd, buffer);
+	if (!buffer)
+		return (NULL);
+	line = ft_find_newline(buffer);
+	buffer = ft_store(buffer);
+	return (line);
 }
-
-// int main()
-// {
-//     int fd = open("test.txt",O_RDONLY);
-//     char *test;
-
-//     test = get_next_line(fd);
-//     while(test)
-//     {
-//         printf("%s",test);
-//         free(test);
-// 		test = get_next_line(fd);
-
-//     }
-// 	free(test);
-//     return(0);
-// }
