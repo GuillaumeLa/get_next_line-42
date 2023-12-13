@@ -1,5 +1,5 @@
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 
 char	*ft_joinee(char *buffer, char *buf)
@@ -86,16 +86,16 @@ char	*ft_store(char *buffer)
 
 char *get_next_line(int fd)
 {
-    static char *buffer;
+    static char *buffer[1024];
     char *line;
 
     if(fd < 0 || BUFFER_SIZE <= 0 || read(fd,0,0) < 0)
         return (NULL);
-    buffer = ft_read_filed(fd,buffer);
-    if(!buffer)
+    buffer[fd] = ft_read_filed(fd,buffer[fd]);
+    if(!buffer[fd])
         return (NULL);
-    line = ft_find_newline(buffer);
-    buffer = ft_store(buffer);
+    line = ft_find_newline(buffer[fd]);
+    buffer[fd] = ft_store(buffer[fd]);
     return (line);
 }
 
